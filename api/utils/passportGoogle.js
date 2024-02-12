@@ -14,9 +14,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `http://localhost:${
-        process.env.PORT || 5200
-      }/api/users/google/callback`,
+      callbackURL: `https://ghaith-drawing.onrender.com/api/users/google/callback`,
       passReqToCallback: true,
     },
     async function (accessToken, refreshToken, _, profile, done) {
