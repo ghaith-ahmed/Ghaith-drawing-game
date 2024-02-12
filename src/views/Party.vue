@@ -101,7 +101,7 @@ const { user } = useUserStore();
 const party = ref();
 const route = useRoute();
 const router = useRouter();
-const socket = io("http://localhost:3000");
+const socket = io("https://ghaith-drawing.onrender.com");
 const nextTurnDelete = ref([]);
 const nextTurn = ref();
 provide("socket", socket);

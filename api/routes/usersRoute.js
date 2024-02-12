@@ -62,7 +62,12 @@ router.get(
       maxAge: 60000 * 60 * 24 * 90,
       sameSite: "strict",
     });
-    res.redirect(`${process.env.GOOGLE_SUCCESS_URL}/${req.user}`);
+    res.redirect(
+      `${
+        process.env.GOOGLE_SUCCESS_URL ??
+        "https://ghaith-drawing.onrender.com/login/success"
+      }/${req.user}`
+    );
   }
 );
 

@@ -1,6 +1,6 @@
 const Party = require("../models/partyModel");
 const crypto = require("crypto");
-const io = require("../socket");
+const io = require("../index");
 const wait = require("../utils/wait");
 let nounList = require("../utils/nouns.json");
 
