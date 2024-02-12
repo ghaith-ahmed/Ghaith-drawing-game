@@ -14,11 +14,11 @@ const helmet = require("helmet");
 const cache = require("./middleware/cache.js");
 const Party = require("./models/partyModel");
 
-app.use(
-  helmet({
-    crossOriginOpenerPolicy: false,
-  })
-);
+// app.use(
+//   helmet({
+//     crossOriginOpenerPolicy: false,
+//   })
+// );
 app.use(
   cors({
     origin: [
