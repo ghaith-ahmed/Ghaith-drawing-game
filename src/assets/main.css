@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  @apply dark:bg-gray-900;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #e7e7e7;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: gray;
+}
+
+.paper-background {
+  background-image: repeating-linear-gradient(
+    0deg,
+    #000000,
+    #000000 2px,
+    transparent 2px,
+    transparent
+  );
+  background-size: 79px 79px;
+  background-color: #f2eeee;
+}
