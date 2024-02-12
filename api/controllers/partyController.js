@@ -1,6 +1,6 @@
 const Party = require("../models/partyModel");
 const crypto = require("crypto");
-const io = require("../index");
+const app = require("../index");
 const wait = require("../utils/wait");
 let nounList = require("../utils/nouns.json");
 
@@ -27,7 +27,7 @@ module.exports.getParty = async (req, res) => {
   const party = await Party.findOne({ code }).populate("members.user");
 
   if (!party) throw new Error("Party doesn't exist!");
-
+  
   if (!party.members?.some((member) => member.user._id.equals(req.user._id))) {
     party.members.push({ user: req.user._id });
     if (!party.turn) updateGame(party);
@@ -53,7 +53,7 @@ const updateGame = async (party) => {
 
   party.turn = party.members[0].user._id;
   party.word = word;
-  io.to(party._id.toString()).emit("turn", turn, word);
+  app.io.to(party._id.toString()).emit("turn", turn, word);
 
   const start = async () => {
     while (true) {
@@ -63,7 +63,7 @@ const updateGame = async (party) => {
       if (!newParty || newParty.members.length < 2) {
         party.turn = null;
         party.word = null;
-        io.to(party._id.toString()).emit("turn");
+        app.io.to(party._id.toString()).emit("turn");
         await party.save();
         break;
       }
@@ -71,7 +71,7 @@ const updateGame = async (party) => {
       while (previousTurn == turn) {
         turn = Math.floor(Math.random() * newParty.members.length);
       }
-      io.to(party._id.toString()).emit("next", turn);
+      app.io.to(party._id.toString()).emit("next", turn);
       await wait(2000);
 
       word = nounList[Math.floor(Math.random() * nounList.length)];
@@ -84,7 +84,7 @@ const updateGame = async (party) => {
         turn = 0;
       }
       previousTurn = turn;
-      io.to(party._id.toString()).emit("turn", turn, word);
+      app.io.to(party._id.toString()).emit("turn", turn, word);
       await party.save();
     }
   };
