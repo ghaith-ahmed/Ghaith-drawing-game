@@ -43,13 +43,11 @@ app.use(cache);
 
 const __dirname1 = path.resolve();
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static(path.join(__dirname1, "/build")));
+app.use(express.static(path.join(__dirname1, "/build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname1, "build", "index.html"));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname1, "build", "index.html"));
+});
 
 const server = app.listen(PORT, () =>
   console.log(`Server is running on port ${PORT}`)
